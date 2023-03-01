@@ -3,7 +3,7 @@
 import time
 from datetime import datetime
 from DB_engine import Messages, Managers, Chats, session, make_base
-from sqlalchemy import func
+from sqlalchemy import func, join
 from telegram_site_helper_config import MANAGERPASS, MY_TOKEN
 import telebot
 import json
@@ -126,11 +126,10 @@ def show_history(message):
         else:
             chat_customer_name = "Клиент"
 
-        join_condition = Messages.c.msgFrom == Managers.c.managerId
-        result = session.query(Messages.c.msgTime,Messages.c.msgText,
-                      Managers.c.managerName).select_from(
-           Messages.join(Managers, join_condition,isouter=True)
-        ).where(Messages.c.msgChatId == chat_id).order_by(Messages.c.msgTime)
+        result = session.query(Messages.message_time, Messages.message_text,
+                               Managers.manager_name).select_from(
+            join(Messages, Managers, Messages.message_from == Managers.manager_id, isouter=True)
+            ).where(Messages.message_chat_id == chat_id).order_by(Messages.message_time)
 
         for message_line in result:
             msg = '\n'
