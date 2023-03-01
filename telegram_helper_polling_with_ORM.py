@@ -3,7 +3,7 @@
 import time
 from datetime import datetime
 from DB_engine import Messages, Managers, Chats, session, make_base
-from sqlalchemy import update, delete, func
+from sqlalchemy import func
 from telegram_site_helper_config import MANAGERPASS, MY_TOKEN
 import telebot
 import json
