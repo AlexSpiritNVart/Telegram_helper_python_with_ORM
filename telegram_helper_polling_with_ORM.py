@@ -121,7 +121,7 @@ def show_history(message):
 
     if result[0] > 0:
         result = session.query(Chats.chat_costumer_name, Chats.chat_costumer_phone).where(Chats.chat_id==chat_id)
-        if result[0]:
+        if result[0][0]:
             chat_customer_name = result[0]
         else:
             chat_customer_name = "Клиент"
