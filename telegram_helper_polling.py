@@ -276,11 +276,6 @@ def send_photo(message):
     write_to_bd_many(sql, [show_manager_now_chat(message), show_manager_id(message), message.date, json.dumps(file)])
 
 
-# @bot.edited_message_handlers()
-# def check_all_mess(message):
-#     print(message)
-
-
 @bot.callback_query_handler(func=lambda call: True)
 def test_func(call):
     print(call)
@@ -294,8 +289,4 @@ if __name__ == '__main__':
         except Exception as ex:
             logger.error(ex)
             time.sleep(60)
-    # logging.basicConfig(level=logging.ERROR, filename='telebot.log')
-    # try:
-    #     bot.infinity_polling(none_stop=True)
-    # except Exception as ex:
-    #     logger.error(ex)
+            
